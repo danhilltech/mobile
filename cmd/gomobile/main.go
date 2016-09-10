@@ -194,7 +194,7 @@ func (cmd *command) usage() {
 }
 
 var usageTmpl = template.Must(template.New("usage").Parse(
-	`Gomobile is a tool for building and running mobile apps written in Go.
+	`Gomobile is a tool for building and running mobile and OSX apps written in Go.
 
 To install:
 

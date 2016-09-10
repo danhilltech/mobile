@@ -23,6 +23,7 @@ var (
 	darwinArm64Env []string
 	darwin386Env   []string
 	darwinAmd64Env []string
+	darwinOsxEnv	 []string
 
 	androidArmNM string
 	darwinArmNM  string
@@ -172,6 +173,21 @@ func envInit() (err error) {
 		"CXX=" + clang,
 		"CGO_CFLAGS=" + cflags + " -mios-simulator-version-min=6.1 -arch x86_64",
 		"CGO_LDFLAGS=" + cflags + " -mios-simulator-version-min=6.1 -arch x86_64",
+		"CGO_ENABLED=1",
+	}
+
+	clang, cflags, err = envClang("macosx")
+	if err != nil {
+		return err
+	}
+
+	darwinOsxEnv = []string{
+		"GOOS=darwin",
+		"GOARCH=amd64",
+		"CC=" + clang,
+		"CXX=" + clang,
+		"CGO_CFLAGS=" + cflags + " -arch x86_64",
+		"CGO_LDFLAGS=" + cflags + " -arch x86_64",
 		"CGO_ENABLED=1",
 	}
 

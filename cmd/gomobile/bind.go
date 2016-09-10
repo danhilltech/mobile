@@ -27,8 +27,8 @@ import (
 var cmdBind = &command{
 	run:   runBind,
 	Name:  "bind",
-	Usage: "[-target android|ios] [-o output] [build flags] [package]",
-	Short: "build a library for Android and iOS",
+	Usage: "[-target android|ios|osx] [-o output] [build flags] [package]",
+	Short: "build a library for Android, iOS and OSX",
 	Long: `
 Bind generates language bindings for the package named by the import
 path, and compiles a library for the named target system.
@@ -116,6 +116,8 @@ func runBind(cmd *command) error {
 	case "darwin":
 		// TODO: use targetArchs?
 		return goIOSBind(pkgs)
+	case "osx":
+		return goOSXBind(pkgs)
 	default:
 		return fmt.Errorf(`invalid -target=%q`, buildTarget)
 	}
